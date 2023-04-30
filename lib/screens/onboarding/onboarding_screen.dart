@@ -1,48 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
-import 'package:medical_project/utils/color.dart';
-import 'package:medical_project/utils/images_path.dart';
-import 'package:medical_project/utils/text.dart';
+import 'package:medical_project/screens/home/home_page.dart';
+import 'package:medical_project/screens/onboarding/intro_screen_1.dart';
+import 'package:medical_project/screens/onboarding/intro_screen_2.dart';
+import 'package:medical_project/screens/onboarding/intro_screen_3.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  PageController _controller = PageController();
+
+  bool onLastPage = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          LiquidSwipe(
-            pages: [
-              Container(
-                padding: const EdgeInsets.all(15),
-                color: primary,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Image(image: AssetImage(onBoardingImage1)),
-                      Column(
-                        children: const [
-                          Text("Title 2"),
-                          Text(
-                            "Subtitle 1",
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                      Text(counter1),
-                      SizedBox(
-                        height: 40,
-                      ),
-                    ]),
-              ),
-              Container(
-                color: primary_red,
-              ),
-              Container(
-                color: primary_yellow,
-              ),
+          PageView(
+            controller: _controller,
+            onPageChanged: (index) {
+              setState(() {
+                onLastPage = index == 2;
+              });
+            },
+            children: const [
+              IntroPage1(),
+              IntroPage2(),
+              IntroPage3(),
             ],
+          ),
+          Container(
+            alignment: Alignment(0, 0.8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                !onLastPage
+                    ? GestureDetector(
+                        onTap: () {
+                          _controller.jumpToPage(2);
+                        },
+                        child: Text('skip'),
+                      )
+                    : Text(''),
+                SmoothPageIndicator(controller: _controller, count: 3),
+                onLastPage
+                    ? GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return HomePage();
+                              },
+                            ),
+                          );
+                        },
+                        child: Text('done'),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          _controller.nextPage(
+                            duration: Duration(
+                              milliseconds: 500,
+                            ),
+                            curve: Curves.easeIn,
+                          );
+                        },
+                        child: Text('next'),
+                      ),
+              ],
+            ),
           )
         ],
       ),
