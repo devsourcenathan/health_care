@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyTest(),
+      home: const OnBoardingScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -20,7 +20,7 @@ class OnBoardingScreen extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // const Image(image: AssetImage(onBoardingImage1)),
+                      const Image(image: AssetImage(onBoardingImage1)),
                       Column(
                         children: const [
                           Text("Title 2"),
