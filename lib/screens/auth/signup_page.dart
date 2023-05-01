@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_project/screens/auth/login_page.dart';
 import 'package:medical_project/utils/color.dart';
@@ -48,7 +49,9 @@ class _SignupPageState extends State<SignupPage> {
 
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      print(e.message);
+      if (kDebugMode) {
+        print(e.message);
+      }
     }
   }
 
@@ -90,15 +93,14 @@ class _SignupPageState extends State<SignupPage> {
                     fontSize: 18,
                   ),
                 ),
-
                 const SizedBox(
                   height: 20,
                 ),
                 //username
 
                 MyTextField(
-                  controller: emailController,
-                  hintText: "Email",
+                  controller: usernameController,
+                  hintText: "Nom d'utilisateur",
                   obscureText: false,
                 ),
 
@@ -108,8 +110,8 @@ class _SignupPageState extends State<SignupPage> {
                 //username
 
                 MyTextField(
-                  controller: usernameController,
-                  hintText: "Nom d'utilisateur",
+                  controller: emailController,
+                  hintText: "Email",
                   obscureText: false,
                 ),
 
