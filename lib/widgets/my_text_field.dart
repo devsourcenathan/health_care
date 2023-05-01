@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medical_project/utils/color.dart';
 
 class MyTextField extends StatelessWidget {
-  final controller;
+  final TextEditingController controller;
   final String hintText;
   final bool obscureText;
 
@@ -20,12 +20,12 @@ class MyTextField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.white,
               ),
               borderRadius: BorderRadius.all(Radius.circular(20))),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: primary,
             ),
