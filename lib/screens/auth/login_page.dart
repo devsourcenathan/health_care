@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_project/screens/auth/signup_page.dart';
+import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/widgets/my_button.dart';
 import 'package:medical_project/widgets/my_text_field.dart';
 import 'package:medical_project/widgets/square_tile.dart';
@@ -95,8 +96,9 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 //logo
                 const Icon(
-                  Icons.house_rounded,
+                  Icons.medical_services,
                   size: 80,
+                  color: primary,
                 ),
 
                 const SizedBox(
@@ -118,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 MyTextField(
                   controller: usernameController,
-                  hintText: "Nom d'utilisateur",
+                  hintText: "Email",
                   obscureText: false,
                 ),
 
@@ -144,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         "Mot de passe oublié ?",
-                        style: TextStyle(color: Colors.grey[600]),
+                        style: TextStyle(color: primary),
                       ),
                     ],
                   ),
@@ -227,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         "S'inscrire maintenant",
                         style: TextStyle(
-                          color: Colors.blue,
+                          color: primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

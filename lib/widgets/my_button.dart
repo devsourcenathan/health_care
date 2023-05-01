@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medical_project/utils/color.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
@@ -13,7 +14,7 @@ class MyButton extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         margin: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: primary,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Center(

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_project/screens/auth/login_page.dart';
+import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/widgets/my_button.dart';
 import 'package:medical_project/widgets/my_text_field.dart';
 import 'package:medical_project/widgets/square_tile.dart';
@@ -72,8 +73,9 @@ class _SignupPageState extends State<SignupPage> {
               children: [
                 //logo
                 const Icon(
-                  Icons.house_rounded,
+                  Icons.medical_services,
                   size: 80,
+                  color: primary,
                 ),
 
                 const SizedBox(
@@ -201,7 +203,7 @@ class _SignupPageState extends State<SignupPage> {
                       child: const Text(
                         "Se connecter",
                         style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
+                            color: primary, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

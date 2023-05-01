@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:medical_project/screens/auth/login_page.dart';
 import 'package:medical_project/screens/home/home_page.dart';
-import 'package:medical_project/screens/onboarding/intro_screen_1.dart';
-import 'package:medical_project/screens/onboarding/intro_screen_2.dart';
-import 'package:medical_project/screens/onboarding/intro_screen_3.dart';
+import 'package:medical_project/screens/onboarding/intro_screen.dart';
+import 'package:medical_project/utils/color.dart';
+import 'package:medical_project/utils/images_path.dart';
+import 'package:medical_project/utils/text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -30,13 +31,28 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               });
             },
             children: const [
-              IntroPage1(),
-              IntroPage2(),
-              IntroPage3(),
+              IntroScreen(
+                image: onBoardingImage1,
+                title: title1,
+                description: subtitle1,
+                count: "1",
+              ),
+              IntroScreen(
+                image: onBoardingImage2,
+                title: title1,
+                description: subtitle1,
+                count: "2",
+              ),
+              IntroScreen(
+                image: onBoardingImage3,
+                title: title1,
+                description: subtitle1,
+                count: "3",
+              ),
             ],
           ),
           Container(
-            alignment: Alignment(0, 0.8),
+            alignment: Alignment(0, 0.9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -61,7 +77,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             ),
                           );
                         },
-                        child: Text('done'),
+                        child: Icon(
+                          Icons.arrow_circle_right_rounded,
+                          size: 30,
+                          color: primary,
+                        ),
                       )
                     : GestureDetector(
                         onTap: () {
@@ -72,7 +92,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             curve: Curves.easeIn,
                           );
                         },
-                        child: Text('next'),
+                        child: Icon(
+                          Icons.arrow_circle_right_rounded,
+                          size: 30,
+                          color: secondary,
+                        ),
                       ),
               ],
             ),
