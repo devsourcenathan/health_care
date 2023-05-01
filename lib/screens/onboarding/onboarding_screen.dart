@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medical_project/screens/auth/login_page.dart';
 import 'package:medical_project/screens/home/home_page.dart';
-import 'package:medical_project/screens/onboarding/intro_screen.dart';
+import 'package:medical_project/widgets/intro_screen.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/utils/images_path.dart';
 import 'package:medical_project/utils/text.dart';
@@ -15,7 +15,7 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
 
   bool onLastPage = false;
   @override
@@ -52,7 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ],
           ),
           Container(
-            alignment: Alignment(0, 0.9),
+            alignment: const Alignment(0, 0.9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -61,10 +61,43 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         onTap: () {
                           _controller.jumpToPage(2);
                         },
-                        child: Text('skip'),
+                        child: const Text(
+                          'Passer',
+                          style: TextStyle(color: primary),
+                        ),
                       )
-                    : Text(''),
-                SmoothPageIndicator(controller: _controller, count: 3),
+                    : const Text(''),
+                SmoothPageIndicator(
+                  controller: _controller,
+                  count: 3,
+                  effect: CustomizableEffect(
+                    dotDecoration: const DotDecoration(
+                      width: 12,
+                      height: 8,
+                      color: secondary,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(2),
+                        topRight: Radius.circular(16),
+                        bottomLeft: Radius.circular(16),
+                        bottomRight: Radius.circular(2),
+                      ),
+                      verticalOffset: 0,
+                    ),
+                    activeDotDecoration: DotDecoration(
+                      width: 25,
+                      height: 12,
+                      color: primary,
+                      rotationAngle: 180,
+                      verticalOffset: -10,
+                      borderRadius: BorderRadius.circular(50),
+                      // dotBorder: DotBorder(
+                      //   padding: 2,
+                      //   width: 2,
+                      //   color: Colors.indigo,
+                      // ),
+                    ),
+                  ),
+                ),
                 onLastPage
                     ? GestureDetector(
                         onTap: () {
@@ -77,22 +110,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             ),
                           );
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_circle_right_rounded,
-                          size: 30,
+                          size: 50,
                           color: primary,
                         ),
                       )
                     : GestureDetector(
                         onTap: () {
                           _controller.nextPage(
-                            duration: Duration(
+                            duration: const Duration(
                               milliseconds: 500,
                             ),
                             curve: Curves.easeIn,
                           );
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_circle_right_rounded,
                           size: 30,
                           color: secondary,

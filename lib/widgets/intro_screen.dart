@@ -32,7 +32,7 @@ class IntroScreen extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 28,
                 ),
@@ -42,7 +42,7 @@ class IntroScreen extends StatelessWidget {
                 child: Text(
                   description,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
@@ -50,12 +50,27 @@ class IntroScreen extends StatelessWidget {
               ),
             ],
           ),
-          Text(
-            "$count/3",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 18, color: secondary),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                count,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: primary,
+                ),
+              ),
+              Text(
+                "/3",
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: secondary),
+              ),
+            ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           )
         ],
