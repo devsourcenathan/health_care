@@ -7,7 +7,9 @@ import 'package:medical_project/widgets/my_text_field.dart';
 import 'package:medical_project/widgets/square_tile.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final Function()? toggleScreen;
+
+  const LoginPage({super.key, required this.toggleScreen});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -37,13 +39,8 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      if (e.code == 'user-not-found') {
-        showMessage('User not found');
-      } else if (e.code == 'wrong-password') {
-        showMessage('Wrong password');
-      } else {
-        showMessage('An error occurred');
-      }
+
+      showMessage(e.code);
     }
 
     // Navigator.pushReplacement(
@@ -58,8 +55,13 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(
-          title: Text('error'),
+        return AlertDialog(
+          icon: const Icon(Icons.error_outline_rounded),
+          iconColor: primary_red,
+          title: Text(
+            message,
+            style: const TextStyle(color: primary_red),
+          ),
           // title: Text(message),
         );
       },
@@ -225,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
                       width: 5,
                     ),
                     GestureDetector(
-                      onTap: () => goTo(context, SignupPage()),
+                      onTap: widget.toggleScreen,
                       child: const Text(
                         "S'inscrire maintenant",
                         style: TextStyle(

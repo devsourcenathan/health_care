@@ -8,7 +8,8 @@ import 'package:medical_project/widgets/my_text_field.dart';
 import 'package:medical_project/widgets/square_tile.dart';
 
 class SignupPage extends StatefulWidget {
-  SignupPage({super.key});
+  final Function()? toggleScreen;
+  const SignupPage({super.key, required this.toggleScreen});
 
   @override
   State<SignupPage> createState() => _SignupPageState();
@@ -23,7 +24,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     emailController.dispose();
     usernameController.dispose();
     passwordController.dispose();
@@ -55,14 +55,14 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
-  void goTo(context, page) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => page,
-      ),
-    );
-  }
+  // void goTo(context, page) {
+  //   Navigator.pushReplacement(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => page,
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +201,7 @@ class _SignupPageState extends State<SignupPage> {
                       width: 5,
                     ),
                     GestureDetector(
-                      onTap: () => goTo(context, LoginPage()),
+                      onTap: widget.toggleScreen,
                       child: const Text(
                         "Se connecter",
                         style: TextStyle(

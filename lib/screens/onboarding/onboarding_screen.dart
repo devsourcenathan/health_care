@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medical_project/screens/auth/login_page.dart';
 import 'package:medical_project/screens/home/home_page.dart';
+import 'package:medical_project/screens/home/main_page.dart';
 import 'package:medical_project/widgets/intro_screen.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/utils/images_path.dart';
@@ -105,7 +106,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return LoginPage();
+                                return const MainPage();
                               },
                             ),
                           );
