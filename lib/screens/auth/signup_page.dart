@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:medical_project/screens/auth/login_page.dart';
 import 'package:medical_project/utils/color.dart';
+import 'package:medical_project/utils/text.dart';
 import 'package:medical_project/widgets/my_button.dart';
 import 'package:medical_project/widgets/my_text_field.dart';
 import 'package:medical_project/widgets/square_tile.dart';
@@ -87,7 +87,7 @@ class _SignupPageState extends State<SignupPage> {
                 //welcome
 
                 Text(
-                  "Bienvenue, inscrivez vous pour continuer",
+                  signUpMessageText,
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 18,
@@ -100,7 +100,7 @@ class _SignupPageState extends State<SignupPage> {
 
                 MyTextField(
                   controller: usernameController,
-                  hintText: "Nom d'utilisateur",
+                  hintText: usernameText,
                   obscureText: false,
                 ),
 
@@ -111,7 +111,7 @@ class _SignupPageState extends State<SignupPage> {
 
                 MyTextField(
                   controller: emailController,
-                  hintText: "Email",
+                  hintText: mailText,
                   obscureText: false,
                 ),
 
@@ -121,7 +121,7 @@ class _SignupPageState extends State<SignupPage> {
                 //password
                 MyTextField(
                   controller: passwordController,
-                  hintText: "Mot de passe",
+                  hintText: passwordText,
                   obscureText: true,
                 ),
 
@@ -132,7 +132,7 @@ class _SignupPageState extends State<SignupPage> {
                 //Sign in Button
                 MyButton(
                   onTap: signUserUp,
-                  text: "S'inscrire",
+                  text: signInText,
                 ),
 
                 const SizedBox(
@@ -153,7 +153,7 @@ class _SignupPageState extends State<SignupPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
-                          "Ou continuer avec",
+                          otherText,
                           style: TextStyle(
                             color: Colors.grey[700],
                           ),
@@ -194,7 +194,7 @@ class _SignupPageState extends State<SignupPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Déjà inscrit ?",
+                      alreadyAccountText,
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     const SizedBox(
@@ -203,7 +203,7 @@ class _SignupPageState extends State<SignupPage> {
                     GestureDetector(
                       onTap: widget.toggleScreen,
                       child: const Text(
-                        "Se connecter",
+                        signInNowText,
                         style: TextStyle(
                             color: primary, fontWeight: FontWeight.bold),
                       ),

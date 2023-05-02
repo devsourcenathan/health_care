@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:medical_project/screens/onboarding/test_screen.dart';
 import 'package:medical_project/utils/firebase_options.dart';
 import 'package:medical_project/screens/onboarding/onboarding_screen.dart';
 
