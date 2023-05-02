@@ -9,6 +9,8 @@ const String counter1 = "1";
 const String counter2 = "2";
 const String counter3 = "3";
 
+const String skipText = "Passer";
+
 //Auth text
 
 const String loginMessageText = "Bienvenue, se connecter";
@@ -22,8 +24,8 @@ const String signUpNowText = "S'inscrire maintenant";
 
 const String signUpMessageText = "Bienvenue, inscrivez vous pour continuer";
 const String usernameText = "Nom d'utilisateur";
-const String signInText = "S'inscrire'";
-const String alreadyAccountText = "Deja inscrit(e) ?";
+const String signInText = "S'inscrire";
+const String alreadyAccountText = "Déjà inscrit(e) ?";
 const String signInNowText = "Se connecter";
 //Navigation text
 const String home = "Accueil";

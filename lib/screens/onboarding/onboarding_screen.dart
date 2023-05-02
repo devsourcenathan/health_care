@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:medical_project/screens/auth/login_page.dart';
-import 'package:medical_project/screens/home/home_page.dart';
 import 'package:medical_project/screens/home/main_page.dart';
 import 'package:medical_project/widgets/intro_screen.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/utils/images_path.dart';
 import 'package:medical_project/utils/text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -16,6 +15,11 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  _storeOnboardInfo() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setBool('onBoard', true);
+  }
+
   final PageController _controller = PageController();
 
   bool onLastPage = false;
@@ -63,7 +67,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           _controller.jumpToPage(2);
                         },
                         child: const Text(
-                          'Passer',
+                          skipText,
                           style: TextStyle(color: primary),
                         ),
                       )
@@ -102,6 +106,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 onLastPage
                     ? GestureDetector(
                         onTap: () {
+                          _storeOnboardInfo();
                           Navigator.push(
                             context,
                             MaterialPageRoute(

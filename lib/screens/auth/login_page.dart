@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_project/utils/color.dart';
+import 'package:medical_project/utils/images_path.dart';
 import 'package:medical_project/utils/text.dart';
 import 'package:medical_project/widgets/my_button.dart';
 import 'package:medical_project/widgets/my_text_field.dart';
@@ -203,11 +204,11 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    SquareTile(imagePath: 'lib/images/logos/google.png'),
+                    SquareTile(imagePath: googlePath),
                     SizedBox(
                       width: 25,
                     ),
-                    SquareTile(imagePath: 'lib/images/logos/apple.png'),
+                    SquareTile(imagePath: applePath),
                   ],
                 ),
 
