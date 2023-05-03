@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:medical_project/utils/color.dart';
-import 'package:medical_project/widgets/MyBottomNavigationBar.dart';
-import 'package:medical_project/widgets/MySearchBar.dart';
+import 'package:medical_project/widgets/my_bottom_navigation_bar.dart';
+import 'package:medical_project/widgets/my_search_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

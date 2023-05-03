@@ -35,3 +35,11 @@ const String profile = "Profile";
 
 //Search bar text
 const String placeholderText = "Rechercher...";
+
+//Profile page text
+
+const dataText = "Mes donnees";
+const planningText = "Mes rendez-vous";
+const notificationText = "Notifications";
+const settingText = "Parametres";
+const logoutText = "Se deconnecter";

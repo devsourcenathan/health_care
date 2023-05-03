@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:medical_project/screens/profile/profile_screen.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/utils/text.dart';
 
@@ -44,22 +45,29 @@ class _MyBottomNavigationBar extends State<MyBottomNavigationBar> {
             duration: const Duration(milliseconds: 500),
             tabBackgroundColor: Colors.grey[100]!,
             color: Colors.white,
-            tabs: const [
-              GButton(
+            tabs: [
+              const GButton(
                 icon: LineIcons.home,
                 text: home,
               ),
-              GButton(
+              const GButton(
                 icon: LineIcons.search,
                 text: search,
               ),
-              GButton(
+              const GButton(
                 icon: LineIcons.sms,
                 text: chat,
               ),
               GButton(
                 icon: LineIcons.user,
                 text: profile,
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const ProfileScreen(),
+                    ),
+                  );
+                },
               ),
             ],
             selectedIndex: _selectedIndex,
