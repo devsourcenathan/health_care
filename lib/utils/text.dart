@@ -32,3 +32,6 @@ const String home = "Accueil";
 const String search = "Rechercher";
 const String chat = "Message";
 const String profile = "Profile";
+
+//Search bar text
+const String placeholderText = "Rechercher...";

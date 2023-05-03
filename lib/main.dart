@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: isViewed == true ? const AuthPage() : const OnBoardingScreen(),
+      // home: isViewed == true ? const AuthPage() : const OnBoardingScreen(),
+      home: OnBoardingScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

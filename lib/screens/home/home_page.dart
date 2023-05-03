@@ -4,6 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/widgets/MyBottomNavigationBar.dart';
+import 'package:medical_project/widgets/MySearchBar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,14 +14,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const MyBottomNavigationBar(),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Column(
+              children: [
+                SearchBar(searchController: searchController),
+              ],
+            ),
             const Text(
               'Home page',
               style: TextStyle(fontSize: 25),
