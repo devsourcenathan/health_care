@@ -1,12 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:medical_project/screens/auth/auth_page.dart';
+import 'package:medical_project/screens/home/main_page.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/utils/text.dart';
 import 'package:medical_project/widgets/my_item_list.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +25,20 @@ class ProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Icon(
-                    LineIcons.arrowLeft,
-                    size: 40,
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     GestureDetector(
+            //       onTap: () {
+            //         Navigator.pop(context);
+            //       },
+            //       child: const Icon(
+            //         LineIcons.arrowLeft,
+            //         size: 40,
+            //       ),
+            //     ),
+            //   ],
+            // ),
             const SizedBox(
               height: 20,
             ),
@@ -40,20 +49,22 @@ class ProfileScreen extends StatelessWidget {
                   child: const CircleAvatar(
                     radius: 70,
                     backgroundColor: secondary,
-                    child: Text('Image profile'),
+                    backgroundImage:
+                        AssetImage('lib/images/profile/profile.png'),
+                    // child: Text('Image profile'),
                   ),
                 ),
                 const Text(
-                  'Nathan Tchinda',
+                  'Kevine Kadje',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: primary,
                   ),
                 ),
-                const Text(
-                  'sadenachbinathan@gmail.com',
-                  style: TextStyle(
+                Text(
+                  user.email!,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
@@ -92,6 +103,11 @@ class ProfileScreen extends StatelessWidget {
               itemTitle: logoutText,
               onTap: () {
                 FirebaseAuth.instance.signOut();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const MainPage(),
+                  ),
+                );
               },
             ),
           ],

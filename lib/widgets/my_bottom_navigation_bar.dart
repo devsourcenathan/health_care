@@ -6,22 +6,16 @@ import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/utils/text.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
-  // final Function onTap;
-  const MyBottomNavigationBar({super.key});
+  final Function onTap;
+  final int selectedIndex;
+  const MyBottomNavigationBar(
+      {super.key, required this.onTap, required this.selectedIndex});
 
   @override
   State<MyBottomNavigationBar> createState() => _MyBottomNavigationBar();
 }
 
 class _MyBottomNavigationBar extends State<MyBottomNavigationBar> {
-  int _selectedIndex = 0;
-
-  void onTap(index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,34 +39,34 @@ class _MyBottomNavigationBar extends State<MyBottomNavigationBar> {
             duration: const Duration(milliseconds: 500),
             tabBackgroundColor: Colors.grey[100]!,
             color: Colors.white,
-            tabs: [
-              const GButton(
+            tabs: const [
+              GButton(
                 icon: LineIcons.home,
                 text: home,
               ),
-              const GButton(
+              GButton(
                 icon: LineIcons.search,
                 text: search,
               ),
-              const GButton(
+              GButton(
                 icon: LineIcons.sms,
                 text: chat,
               ),
               GButton(
                 icon: LineIcons.user,
                 text: profile,
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const ProfileScreen(),
-                    ),
-                  );
-                },
+                // onPressed: () {
+                //   Navigator.of(context).push(
+                //     MaterialPageRoute(
+                //       builder: (context) => const ProfileScreen(),
+                //     ),
+                //   );
+                // },
               ),
             ],
-            selectedIndex: _selectedIndex,
+            selectedIndex: widget.selectedIndex,
             onTabChange: (index) {
-              onTap(index);
+              widget.onTap(index);
             },
           ),
         ),

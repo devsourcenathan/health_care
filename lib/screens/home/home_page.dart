@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:medical_project/screens/profile/profile_screen.dart';
+import 'package:medical_project/screens/search/search_screen.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/widgets/my_bottom_navigation_bar.dart';
 import 'package:medical_project/widgets/my_search_bar.dart';
@@ -15,45 +17,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final searchController = TextEditingController();
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Home',
+    ),
+    SearchScreen(),
+    Text(
+      'Search',
+    ),
+    ProfileScreen()
+  ];
 
   @override
   Widget build(BuildContext context) {
+    void onTap(index) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+
     return Scaffold(
-      bottomNavigationBar: const MyBottomNavigationBar(),
-      body: Center(
-        child: Column(
-          children: [
-            Column(
-              children: [
-                SearchBar(searchController: searchController),
-              ],
-            ),
-            const Text(
-              'Home page',
-              style: TextStyle(fontSize: 25),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            MaterialButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              color: primary_red,
-              child: const Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Text(
-                  'Sign out',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+      bottomNavigationBar:
+          MyBottomNavigationBar(onTap: onTap, selectedIndex: _selectedIndex),
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
     );
   }
 }

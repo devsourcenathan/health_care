@@ -24,7 +24,7 @@ class ProfileItem extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.symmetric(horizontal: 18),
         decoration: BoxDecoration(
-          color: Colors.green[400],
+          color: primary,
           border: Border.all(color: primary, width: 2),
           borderRadius: BorderRadius.circular(30),
         ),

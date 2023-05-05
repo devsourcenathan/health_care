@@ -25,6 +25,7 @@ class SearchBar extends StatelessWidget {
           ),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
+              width: 2,
               color: primary,
             ),
             borderRadius: BorderRadius.all(
