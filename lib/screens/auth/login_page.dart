@@ -98,10 +98,12 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //logo
-                const Icon(
-                  Icons.medical_services,
-                  size: 80,
-                  color: primary,
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Image.asset(
+                    "lib/images/doctors/doctors.png",
+                  ),
                 ),
 
                 const SizedBox(
@@ -109,12 +111,38 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 //welcome
 
-                Text(
-                  loginMessageText,
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 18,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      loginMessageText,
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      appName,
+                      style: TextStyle(
+                          color: primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      ", ",
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      loginText.toLowerCase(),
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 20,
@@ -217,27 +245,30 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 //register now
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      notAccountText,
-                      style: TextStyle(color: Colors.grey[700]),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    GestureDetector(
-                      onTap: widget.toggleScreen,
-                      child: const Text(
-                        signUpNowText,
-                        style: TextStyle(
-                          color: primary,
-                          fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        notAccountText,
+                        style: TextStyle(color: Colors.grey[700]),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      GestureDetector(
+                        onTap: widget.toggleScreen,
+                        child: const Text(
+                          signUpNowText,
+                          style: TextStyle(
+                            color: primary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

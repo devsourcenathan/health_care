@@ -45,7 +45,7 @@ class _MyBottomNavigationBar extends State<MyBottomNavigationBar> {
                 text: home,
               ),
               GButton(
-                icon: LineIcons.search,
+                icon: LineIcons.calendar,
                 text: search,
               ),
               GButton(

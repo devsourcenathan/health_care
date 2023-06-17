@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -16,6 +17,17 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final user = FirebaseAuth.instance.currentUser!;
+  // var profile = [];
+  // final data = FirebaseFirestore.instance
+  //     .collection("users")
+  //     .where('"uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+  //     .limit(1)
+  //     .get().then((value) => profile.add(value.docs[0].data()));
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +61,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: const CircleAvatar(
                     radius: 70,
                     backgroundColor: secondary,
-                    backgroundImage:
-                        AssetImage('lib/images/profile/profile.png'),
+                    backgroundImage: AssetImage('lib/images/profile/doc.png'),
                     // child: Text('Image profile'),
                   ),
                 ),
-                const Text(
-                  'Kevine Kadje',
+                Text(
+                  "",
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,

@@ -22,6 +22,17 @@ class _SignupPageState extends State<SignupPage> {
   final passwordController = TextEditingController();
 
   final emailController = TextEditingController();
+  final codeController = TextEditingController();
+
+  final Map<String, String> test = {"Chrome": "test"};
+
+  bool isDoctor = false;
+
+  void toggleChoice() {
+    setState(() {
+      isDoctor = !isDoctor;
+    });
+  }
 
   @override
   void dispose() {
@@ -76,16 +87,38 @@ class _SignupPageState extends State<SignupPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //logo
-                const Icon(
-                  Icons.medical_services,
-                  size: 80,
-                  color: primary,
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset(
+                    "lib/images/doctors/doctors.png",
+                    height: 150,
+                  ),
                 ),
 
                 const SizedBox(
                   height: 20,
                 ),
                 //welcome
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      loginMessageText,
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 18,
+                      ),
+                    ),
+                    const Text(
+                      appName,
+                      style: TextStyle(
+                          color: primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
 
                 Text(
                   signUpMessageText,
@@ -126,8 +159,41 @@ class _SignupPageState extends State<SignupPage> {
                   obscureText: true,
                 ),
 
-                const SizedBox(
-                  height: 25,
+                isDoctor
+                    ? Container(
+                        margin: EdgeInsets.symmetric(vertical: 15),
+                        child: MyTextField(
+                          controller: codeController,
+                          hintText: "Numero d'immatriculation",
+                          obscureText: false,
+                        ),
+                      )
+                    : Container(),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5),
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      const Text(
+                        "Je suis medecin",
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      ),
+                      Switch(
+                        value: isDoctor,
+                        onChanged: (_) => {
+                          toggleChoice(),
+                        },
+                        trackColor: const MaterialStatePropertyAll(
+                          Colors.grey,
+                        ),
+                        thumbColor: const MaterialStatePropertyAll(
+                          primary,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
                 //Sign in Button
@@ -191,25 +257,28 @@ class _SignupPageState extends State<SignupPage> {
                 ),
 
                 //register now
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      alreadyAccountText,
-                      style: TextStyle(color: Colors.grey[700]),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    GestureDetector(
-                      onTap: widget.toggleScreen,
-                      child: const Text(
-                        signInNowText,
-                        style: TextStyle(
-                            color: primary, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        alreadyAccountText,
+                        style: TextStyle(color: Colors.grey[700]),
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      GestureDetector(
+                        onTap: widget.toggleScreen,
+                        child: const Text(
+                          signInNowText,
+                          style: TextStyle(
+                              color: primary, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

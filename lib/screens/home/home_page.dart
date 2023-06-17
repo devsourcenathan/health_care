@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:medical_project/screens/home/home_screen.dart';
+import 'package:medical_project/screens/messages/messages_screen.dart';
 import 'package:medical_project/screens/profile/profile_screen.dart';
-import 'package:medical_project/screens/search/search_screen.dart';
+import 'package:medical_project/screens/shedule/schedule_screen.dart';
+import 'package:medical_project/screens/shedule/search_screen.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/widgets/my_bottom_navigation_bar.dart';
 import 'package:medical_project/widgets/my_search_bar.dart';
@@ -20,12 +22,10 @@ class _HomePageState extends State<HomePage> {
   final searchController = TextEditingController();
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    SearchScreen(),
-    Text(
-      'Search',
-    ),
+    ScheduleScreen(),
+    MessagesScreen(),
     ProfileScreen()
   ];
 
