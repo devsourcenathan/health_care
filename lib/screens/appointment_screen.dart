@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medical_project/screens/call/call_page.dart';
+import 'package:medical_project/screens/call/prebuild_page.dart';
+import 'package:medical_project/screens/doctors/create_appointment.dart';
 import 'package:medical_project/utils/color.dart';
+import 'package:medical_project/utils/params.dart';
 import 'package:medical_project/utils/string_utils.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 class AppointmentScreen extends StatelessWidget {
   final doctor;
@@ -76,16 +81,39 @@ class AppointmentScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: const BoxDecoration(
-                                color: Colors.white30,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.call,
-                                color: Colors.white,
-                                size: 25,
+                            GestureDetector(
+                              onTap: () {
+                                if (ZegoUIKitPrebuiltCallMiniOverlayMachine()
+                                    .isMinimizing) {
+                                  /// when the application is minimized (in a minimized state),
+                                  /// disable button clicks to prevent multiple PrebuiltCall components from being created.
+                                  return;
+                                }
+
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PrebuiltCallPage(),
+                                  ),
+                                );
+                                // Navigator.pushNamed(
+                                //     context, PageRouteNames.call,
+                                //     arguments: <String, String>{
+                                //       PageParam.call_id: doctor['uid'],
+                                //     });
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
+                                  color: Colors.white30,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.call,
+                                  color: Colors.white,
+                                  size: 25,
+                                ),
                               ),
                             ),
                             const SizedBox(width: 20),
@@ -309,7 +337,11 @@ class AppointmentScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CreateAppointment(doctor: doctor);
+                }));
+              },
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(vertical: 18),

@@ -71,66 +71,6 @@ class MessagesScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          SizedBox(
-            height: 90,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 6,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  width: 65,
-                  height: 65,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 10,
-                          spreadRadius: 2,
-                          offset: Offset(0, 3),
-                        ),
-                      ]),
-                  child: Stack(
-                    textDirection: TextDirection.rtl,
-                    children: [
-                      Center(
-                        child: Container(
-                          height: 65,
-                          width: 65,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
-                            child: Image.asset(
-                              "lib/images/doctors/${imgs[index]}",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(2),
-                        padding: const EdgeInsets.all(3),
-                        height: 20,
-                        width: 20,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.green,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 6,

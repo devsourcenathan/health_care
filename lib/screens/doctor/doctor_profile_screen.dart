@@ -3,19 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:medical_project/screens/auth/auth_page.dart';
+import 'package:medical_project/screens/doctor/doctor_info.dart';
 import 'package:medical_project/screens/home/main_page.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/utils/text.dart';
 import 'package:medical_project/widgets/my_item_list.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class DoctorProfileScreen extends StatefulWidget {
+  const DoctorProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<DoctorProfileScreen> createState() => _DoctorProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   final user = FirebaseAuth.instance.currentUser!;
 
   late User _currentUser;
@@ -65,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         Text(
-                          name,
+                          "Dr. " + name,
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -88,7 +89,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       leftIcon: LineIcons.database,
                       rightIcon: Icons.chevron_right,
                       itemTitle: dataText,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DoctorInfo(user: userData),
+                          ),
+                        );
+                      },
                     ),
                     ProfileItem(
                       leftIcon: LineIcons.calendar,

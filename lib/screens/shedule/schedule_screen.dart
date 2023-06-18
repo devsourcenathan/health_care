@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medical_project/screens/appointment_screen.dart';
+import 'package:medical_project/screens/shedule/schedule_item.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/widgets/upcoming_schedule.dart';
 
@@ -8,20 +12,16 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-  int _buttonIndex = 0;
+  final user = FirebaseAuth.instance.currentUser!;
 
-  final _scheduleWidgets = [
-    UpcomingSchedule(),
-    Container(),
-    Container(),
-  ];
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Padding(
-      padding: const EdgeInsets.only(top: 40),
-      child: Column(
+    return Container(
+      margin: EdgeInsets.only(top: 50),
+      child: SingleChildScrollView(
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 15),
@@ -34,11 +34,31 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             ),
           ),
 
-          const SizedBox(height: 30),
+          StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("appointments")
+                  .where("patientUid", isEqualTo: user.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return ScheduleItem(
+                      schedule: snapshot.data!.docs[index],
+                    );
+                  },
+                );
+              }),
           // Widgets According to buttons
-          UpcomingSchedule()
         ],
-      ),
-    ));
+      )),
+    );
   }
 }

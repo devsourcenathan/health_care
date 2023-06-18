@@ -1,44 +1,27 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class Appointment {
-  final String name;
-  final DateTime time;
-  final String service;
-  final String id;
-  String status;
-  final String userId;
-  final String medecinId;
+  final String doctorUid;
+  final String patientUid;
+  final DateTime date;
+  final String time;
+  final String status;
 
   Appointment({
-    required this.name,
+    required this.doctorUid,
+    required this.patientUid,
+    required this.date,
     required this.time,
-    required this.service,
-    required this.id,
-    required this.userId,
-    required this.medecinId,
-    required this.status,
+    this.status = 'en attente',
   });
 
-  factory Appointment.fromJson(Map<String, dynamic> json) {
-    return Appointment(
-        name: json['name'],
-        time: (json['time']).toDate(),
-        service: json['service'],
-        status: json['status'],
-        medecinId: json['medecinId'],
-        userId: json['userId'],
-        id: json['id']);
-  }
-
-  toJson() {
+  Map<String, dynamic> toMap() {
     return {
-      'name': name,
-      'service': service,
-      'time': Timestamp.fromDate(time),
+      'doctorUid': doctorUid,
+      'patientUid': patientUid,
+      'date': date,
+      'time': time,
       'status': status,
-      'id': id,
-      'userId': userId,
-      'medecinId': medecinId,
     };
   }
 }
