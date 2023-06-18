@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/utils/images_path.dart';
 import 'package:medical_project/utils/text.dart';
+import 'package:medical_project/utils/utils.dart';
 import 'package:medical_project/widgets/dropdownbutton.dart';
 import 'package:medical_project/widgets/my_button.dart';
 import 'package:medical_project/widgets/my_text_field.dart';
@@ -65,12 +66,15 @@ class _SignupPageState extends State<SignupPage> {
 
       String type = isDoctor ? "doctor" : "patient";
 
+      final id = getUniqueUserId();
+
       await FirebaseFirestore.instance.collection("users").doc(uid).set({
         "uid": uid,
         "name": usernameController.text.trim(),
         "type": type,
         "matriculation": codeController.text.trim(),
         "specialty": specialtyController.text.trim(),
+        "id": id,
       });
 
       Navigator.pop(context);

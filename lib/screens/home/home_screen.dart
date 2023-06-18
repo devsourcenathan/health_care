@@ -42,7 +42,15 @@ class HomeScreen extends StatelessWidget {
     "6.png",
     "4.png",
     "5.png",
+    "1.png",
+    "6.png",
+    "6.png",
+    "4.png",
     "3.png",
+    "1.png",
+    "6.png",
+    "6.png",
+    "4.png",
   ];
 
   List imgs = [

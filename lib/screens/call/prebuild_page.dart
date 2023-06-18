@@ -4,7 +4,8 @@ import 'package:medical_project/utils/utils.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 class PrebuiltCallPage extends StatefulWidget {
-  const PrebuiltCallPage({Key? key}) : super(key: key);
+  final caller;
+  PrebuiltCallPage({Key? key, this.caller}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => PrebuiltCallPageState();
@@ -14,6 +15,7 @@ class PrebuiltCallPageState extends State<PrebuiltCallPage> {
   var id;
   @override
   void initState() {
+    print("ICI" + widget.caller['id']);
     // TODO: implement initState
     super.initState();
     getUniqueUserId().then((value) {
@@ -35,7 +37,7 @@ class PrebuiltCallPageState extends State<PrebuiltCallPage> {
               appSign: appSign,
               userID: id,
               userName: "$id test user",
-              callID: "call_id",
+              callID: widget.caller['id'],
               config: ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall()
                 ..onOnlySelfInRoom = (context) {
                   Navigator.of(context).pop();

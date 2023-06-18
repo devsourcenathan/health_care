@@ -28,112 +28,98 @@ class DoctorsScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 50),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Stack(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Colors.black,
-                          size: 25,
-                        ),
-                      ),
-                      const Icon(
-                        Icons.more_vert,
-                        color: Colors.black,
-                        size: 28,
-                      ),
-                    ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Colors.black,
+                    size: 25,
                   ),
-                  const SizedBox(height: 40),
-
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 15),
-                      child: StreamBuilder(
-                        stream: FirebaseFirestore.instance
-                            .collection("doctors")
-                            .where("specialty",
-                                isEqualTo: specialty.toLowerCase())
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return ListView.builder(
-                              itemCount: snapshot.data!.docs.length,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AppointmentScreen(
-                                          doctor: snapshot.data!.docs[index],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: DoctorTile(
-                                    image: snapshot.data!.docs[index]['image'],
-                                    name: snapshot.data!.docs[index]['name'],
-                                    specialty: snapshot.data!.docs[index]
-                                        ['specialty'],
-                                  ),
-                                );
-                              },
-                            );
-                          } else {
-                            return Center(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.grey,
-                                ),
-                                padding: const EdgeInsets.all(40),
-                                margin: const EdgeInsets.only(top: 40),
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      "Pas de medecin disponible pour cette specialite...",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 10,
-                                        horizontal: 20,
-                                      ),
-                                      margin: const EdgeInsets.all(10),
-                                      color: primary,
-                                      child: const Text(
-                                        "Retourner a l'accueil",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                ),
+                const Icon(
+                  Icons.more_vert,
+                  color: Colors.black,
+                  size: 28,
+                ),
+              ],
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 5),
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("doctors")
+                    .where("specialty", isEqualTo: specialty.toLowerCase())
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AppointmentScreen(
+                                  doctor: snapshot.data!.docs[index],
                                 ),
                               ),
                             );
-                          }
-                        },
+                          },
+                          child: DoctorTile(
+                            image: snapshot.data!.docs[index]['image'],
+                            name: snapshot.data!.docs[index]['name'],
+                            specialty: snapshot.data!.docs[index]['specialty'],
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey,
+                        ),
+                        padding: const EdgeInsets.all(40),
+                        margin: const EdgeInsets.only(top: 40),
+                        child: Column(
+                          children: [
+                            const Text(
+                              "Pas de medecin disponible pour cette specialite...",
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 20,
+                              ),
+                              margin: const EdgeInsets.all(10),
+                              color: primary,
+                              child: const Text(
+                                "Retourner a l'accueil",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                  // DoctorTile(),
-                ],
+                    );
+                  }
+                },
               ),
             ),
           ],

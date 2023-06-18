@@ -93,15 +93,11 @@ class AppointmentScreen extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PrebuiltCallPage(),
+                                    builder: (context) => PrebuiltCallPage(
+                                      caller: doctor,
+                                    ),
                                   ),
                                 );
-                                // Navigator.pushNamed(
-                                //     context, PageRouteNames.call,
-                                //     arguments: <String, String>{
-                                //       PageParam.call_id: doctor['uid'],
-                                //     });
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(10),

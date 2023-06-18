@@ -114,8 +114,9 @@ class _PrescribeScreenState extends State<PrescribeScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PrebuiltCallPage(),
+                                      builder: (context) => PrebuiltCallPage(
+                                        caller: user,
+                                      ),
                                     ),
                                   );
                                 },

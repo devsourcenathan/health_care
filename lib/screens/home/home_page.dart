@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       bottomNavigationBar:
           MyBottomNavigationBar(onTap: onTap, selectedIndex: _selectedIndex),
-      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
+      body: _widgetOptions.elementAt(_selectedIndex),
     );
   }
 }

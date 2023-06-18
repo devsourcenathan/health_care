@@ -10,35 +10,41 @@ import 'package:medical_project/utils/string_utils.dart';
 import 'package:medical_project/widgets/my_text_field.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
-class CreateAppointment extends StatefulWidget {
-  final doctor;
-  CreateAppointment({super.key, required this.doctor});
+class ExamsScreen extends StatefulWidget {
+  final user;
+  ExamsScreen({super.key, required this.user});
 
   @override
-  State<CreateAppointment> createState() => _CreateAppointmentState();
+  State<ExamsScreen> createState() => _ExamsScreenState();
 }
 
-class _CreateAppointmentState extends State<CreateAppointment> {
-  final _dateC = TextEditingController();
-  final _timeC = TextEditingController();
+class _ExamsScreenState extends State<ExamsScreen> {
+  final _nameController = TextEditingController();
+  final _doseController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
 
-    Future<void> _saveData() async {
-      final String date = _dateC.text;
-      final String time = _timeC.text;
-      await FirebaseFirestore.instance.collection('appointments').add({
-        'date': date,
-        'time': time,
-        'doctorUid': widget.doctor['uid'],
-        'patientUid': user.uid,
-        "status": "en attente",
-      });
+    Future<void> _updateData() async {
+      final QuerySnapshot<Map<String, dynamic>> snapshot =
+          await FirebaseFirestore.instance
+              .collection('appointments')
+              .where('patientUid', isEqualTo: widget.user['uid'])
+              .get();
 
-      Navigator.pop(context);
-      _timeC.clear();
+      if (snapshot.docs.isNotEmpty) {
+        final DocumentSnapshot<Map<String, dynamic>> document =
+            snapshot.docs.first;
+        await document.reference.update({
+          'examen': _nameController.text,
+          'motif': _doseController.text,
+        });
+        Navigator.pop(context);
+        print('Document mis à jour');
+      } else {
+        print('Aucun document trouvé');
+      }
     }
 
     return Scaffold(
@@ -79,24 +85,16 @@ class _CreateAppointmentState extends State<CreateAppointment> {
                         children: [
                           CircleAvatar(
                             radius: 35,
-                            backgroundImage:
-                                NetworkImage(widget.doctor['image']),
+                            // backgroundImage:
+                            //     NetworkImage(widget.user['image']),
                           ),
                           const SizedBox(height: 15),
                           Text(
-                            "Dr. " + widget.doctor['name'],
+                            "M./Mde. " + widget.user['name'],
                             style: TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.w500,
                               color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            widget.doctor['specialty'],
-                            style: TextStyle(
-                              color: Colors.white60,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 15),
@@ -175,16 +173,16 @@ class _CreateAppointmentState extends State<CreateAppointment> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     MyTextField(
-                      controller: _dateC,
-                      hintText: "Date",
+                      controller: _nameController,
+                      hintText: "Nom de l'examen",
                       obscureText: false,
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     MyTextField(
-                      controller: _timeC,
-                      hintText: "Heure",
+                      controller: _doseController,
+                      hintText: "Motif",
                       obscureText: false,
                     ),
                     SizedBox(
@@ -212,29 +210,10 @@ class _CreateAppointmentState extends State<CreateAppointment> {
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  "Prix de Consultation",
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
-                ),
-                Text(
-                  "10.000 F",
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
             const SizedBox(height: 15),
             InkWell(
               onTap: () {
-                _saveData();
+                _updateData();
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,
@@ -245,7 +224,7 @@ class _CreateAppointmentState extends State<CreateAppointment> {
                 ),
                 child: const Center(
                   child: Text(
-                    "Valider la consultation",
+                    "Enregistrer",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,

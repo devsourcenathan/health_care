@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_project/screens/call/call_page.dart';
 import 'package:medical_project/screens/call/prebuild_page.dart';
+import 'package:medical_project/screens/doctor/task/exams_screen.dart';
 import 'package:medical_project/screens/doctor/task/prescribe_screen.dart';
 import 'package:medical_project/screens/doctors/create_appointment.dart';
 import 'package:medical_project/utils/color.dart';
@@ -86,8 +87,9 @@ class PatientScreen extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PrebuiltCallPage(),
+                                    builder: (context) => PrebuiltCallPage(
+                                      caller: user,
+                                    ),
                                   ),
                                 );
                                 // Navigator.pushNamed(
@@ -204,7 +206,7 @@ class PatientScreen extends StatelessWidget {
             InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return CreateAppointment(doctor: user);
+                  return ExamsScreen(user: user);
                 }));
               },
               child: Container(
