@@ -19,11 +19,6 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    _currentUser = FirebaseAuth.instance.currentUser!;
-    // _userStream = FirebaseFirestore.instance
-    //     .collection('users')
-    //     .where('uid', isEqualTo: _currentUser.uid)
-    //     .snapshots();
   }
 
   @override

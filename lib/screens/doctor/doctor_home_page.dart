@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:medical_project/screens/doctor/doctor_bottom_navigation_bar.dart';
 import 'package:medical_project/screens/doctor/doctor_main_page.dart';
 import 'package:medical_project/screens/doctor/doctor_profile_screen.dart';
+import 'package:medical_project/screens/doctor/task/schedule_screen.dart';
 import 'package:medical_project/screens/home/home_screen.dart';
 import 'package:medical_project/screens/messages/messages_screen.dart';
 import 'package:medical_project/screens/profile/profile_screen.dart';
@@ -25,8 +27,8 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    DoctorMainPage(),
-    ScheduleScreen(),
+    // DoctorMainPage(),
+    DoctorScheduleScreen(),
     MessagesScreen(),
     DoctorProfileScreen()
   ];
@@ -40,9 +42,9 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
     }
 
     return Scaffold(
-      bottomNavigationBar:
-          MyBottomNavigationBar(onTap: onTap, selectedIndex: _selectedIndex),
-      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
+      bottomNavigationBar: DoctorBottomNavigationBar(
+          onTap: onTap, selectedIndex: _selectedIndex),
+      body: _widgetOptions.elementAt(_selectedIndex),
     );
   }
 }

@@ -15,13 +15,21 @@ class HomeScreen extends StatelessWidget {
   ];
 
   List specialty = [
-    "Psychiatre",
-    "Radiologue",
-    "Rhumatologue",
-    "Urologue",
-    "Dermatologue",
-    "Gynecolgue",
-    "Dentiste",
+    'Cardiologie',
+    'Chirurgie',
+    'Dentiste',
+    'Dermatologie',
+    'Génécologie',
+    'Hématolologie',
+    'Neurologie',
+    'Ophtamologie',
+    'ORL',
+    'Pédiatrie',
+    'Psychiatrie',
+    'Radiologie',
+    'Rhumatologie',
+    'Urologie',
+    'Médecine Générale'
   ];
 
   List specialityImg = [
@@ -32,6 +40,9 @@ class HomeScreen extends StatelessWidget {
     "1.png",
     "6.png",
     "6.png",
+    "4.png",
+    "5.png",
+    "3.png",
   ];
 
   List imgs = [
@@ -42,6 +53,11 @@ class HomeScreen extends StatelessWidget {
     "doctor2.jpg",
     "doctor3.jpg",
     "doctor4.jpg",
+    "doctor4.jpg",
+    "doctor2.jpg",
+    "doctor2.jpg",
+    "doctor3.jpg",
+    "doctor3.jpg",
   ];
 
   @override

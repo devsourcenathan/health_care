@@ -17,6 +17,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
   final _specialtyController = TextEditingController();
   final _yearsController = TextEditingController();
   final _certificateController = TextEditingController();
+  final _aboutController = TextEditingController();
 
   Future<void> _updateData() async {
     final QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
@@ -33,7 +34,8 @@ class _DoctorInfoState extends State<DoctorInfo> {
         'hospital': _hospitalController.text,
         'specialty': _specialtyController.text,
         'years': _yearsController.text,
-        'certificate': _certificateController.text
+        'certificate': _certificateController.text,
+        'about': _aboutController.text,
       });
       Navigator.pop(context);
       print('Document mis à jour');
@@ -178,6 +180,23 @@ class _DoctorInfoState extends State<DoctorInfo> {
                   MyTextField(
                     controller: _certificateController,
                     hintText: widget.user['certificate'] ?? "",
+                    obscureText: false,
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 15, bottom: 5),
+                    child: Text(
+                      "A Propos de moi",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                  MyTextField(
+                    controller: _aboutController,
+                    hintText: widget.user['about'] ?? "",
                     obscureText: false,
                   ),
                 ],

@@ -2,44 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:medical_project/utils/color.dart';
 
 class DropDownButton extends StatefulWidget {
-  const DropDownButton({super.key});
+  final specialisationController;
+  DropDownButton({super.key, required this.specialisationController});
 
   @override
   State<DropDownButton> createState() => _DropDownButton();
 }
 
 final List<String> list = [
-  '   Cardiologie',
-  '   Chirurgie',
-  '   Dentiste',
-  '   Dermatologie',
-  '   Génécologie',
-  '   Hématolologie',
-  '   Neurologie',
-  '   Ophtamologie',
-  '   ORL',
-  '   Pédiatrie',
-  '   Psychiatrie',
-  '   Radiologie',
-  '   Rhumatologie',
-  '   Urologie',
-  '   Médecine Générale'
+  'Cardiologie',
+  'Chirurgie',
+  'Dentiste',
+  'Dermatologie',
+  'Génécologie',
+  'Hématolologie',
+  'Neurologie',
+  'Ophtamologie',
+  'ORL',
+  'Pédiatrie',
+  'Psychiatrie',
+  'Radiologie',
+  'Rhumatologie',
+  'Urologie',
+  'Médecine Générale'
 ];
 
 class _DropDownButton extends State<DropDownButton> {
   static String? dropdownValue;
-  final specialisationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       //BorderSide.color( Colors.transparent),
       child: DropdownButtonFormField<String>(
         value: dropdownValue,
         isExpanded: true,
         icon: const Icon(Icons.keyboard_arrow_down),
-        dropdownColor: primary,
+        // dropdownColor: primary,
         elevation: 16,
         decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(

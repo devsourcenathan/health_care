@@ -2,16 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_project/screens/appointment_screen.dart';
+import 'package:medical_project/screens/doctor/task/schedule_item.dart';
 import 'package:medical_project/screens/shedule/schedule_item.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/widgets/upcoming_schedule.dart';
 
-class ScheduleScreen extends StatefulWidget {
+class DoctorScheduleScreen extends StatefulWidget {
   @override
-  State<ScheduleScreen> createState() => _ScheduleScreenState();
+  State<DoctorScheduleScreen> createState() => _DoctorScheduleScreenState();
 }
 
-class _ScheduleScreenState extends State<ScheduleScreen> {
+class _DoctorScheduleScreenState extends State<DoctorScheduleScreen> {
   final user = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -19,22 +20,22 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     return Container(
       margin: EdgeInsets.only(top: 50),
       child: SingleChildScrollView(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Text(
-              "Vos Rendez-vous",
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w500,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                "Vos Rendez-vous",
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
-          ),
 
-          StreamBuilder(
+            StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("appointments")
                   .where("doctorUid", isEqualTo: user.uid)
@@ -42,7 +43,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: Text("Vous n'avez pas de rendez-vous"),
                   );
                 }
                 return ListView.builder(
@@ -50,15 +51,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return ScheduleItem(
+                    return DoctorScheduleItem(
                       schedule: snapshot.data!.docs[index],
                     );
                   },
                 );
-              }),
-          // Widgets According to buttons
-        ],
-      )),
+              },
+            ),
+            // Widgets According to buttons
+          ],
+        ),
+      ),
     );
   }
 }

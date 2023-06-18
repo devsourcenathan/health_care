@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_project/utils/color.dart';
 import 'package:medical_project/utils/images_path.dart';
 import 'package:medical_project/utils/text.dart';
+import 'package:medical_project/widgets/dropdownbutton.dart';
 import 'package:medical_project/widgets/my_button.dart';
 import 'package:medical_project/widgets/my_text_field.dart';
 import 'package:medical_project/widgets/square_tile.dart';
@@ -23,8 +25,7 @@ class _SignupPageState extends State<SignupPage> {
 
   final emailController = TextEditingController();
   final codeController = TextEditingController();
-
-  final Map<String, String> test = {"Chrome": "test"};
+  final specialtyController = TextEditingController();
 
   bool isDoctor = false;
 
@@ -54,10 +55,23 @@ class _SignupPageState extends State<SignupPage> {
     );
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+
+      String uid = userCredential.user!.uid;
+
+      String type = isDoctor ? "doctor" : "patient";
+
+      await FirebaseFirestore.instance.collection("users").doc(uid).set({
+        "uid": uid,
+        "name": usernameController.text.trim(),
+        "type": type,
+        "matriculation": codeController.text.trim(),
+        "specialty": specialtyController.text.trim(),
+      });
 
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
@@ -66,15 +80,6 @@ class _SignupPageState extends State<SignupPage> {
       }
     }
   }
-
-  // void goTo(context, page) {
-  //   Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => page,
-  //     ),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -162,10 +167,20 @@ class _SignupPageState extends State<SignupPage> {
                 isDoctor
                     ? Container(
                         margin: EdgeInsets.symmetric(vertical: 15),
-                        child: MyTextField(
-                          controller: codeController,
-                          hintText: "Numero d'immatriculation",
-                          obscureText: false,
+                        child: Column(
+                          children: [
+                            MyTextField(
+                              controller: codeController,
+                              hintText: "Numero d'immatriculation",
+                              obscureText: false,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            DropDownButton(
+                              specialisationController: specialtyController,
+                            ),
+                          ],
                         ),
                       )
                     : Container(),
